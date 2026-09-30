@@ -1,0 +1,6 @@
+{
+  "name": "@pulse/contracts",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Pulse contracts — a SHARED package consumed by every app; requires multi-team review per Lesson 0's rule"
+}

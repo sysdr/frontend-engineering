@@ -1,0 +1,21 @@
+{
+  "_comment": "Declarative branch protection policy for the Pulse platform 'main' branch. Applied via scripts/apply-branch-protection.mjs against the real GitHub API once this repo exists on GitHub (requires a repo-scoped token — see BUILD.md). Kept as versioned JSON, not a manual GitHub UI setting, so the policy is reviewable in a PR like any other change.",
+  "branch": "main",
+  "required_status_checks": {
+    "strict": true,
+    "contexts": [
+      "codeowners-coverage",
+      "pr-description-validation",
+      "test"
+    ]
+  },
+  "enforce_admins": true,
+  "required_pull_request_reviews": {
+    "require_code_owner_reviews": true,
+    "required_approving_review_count": 1,
+    "dismiss_stale_reviews": true
+  },
+  "restrictions": null,
+  "allow_force_pushes": false,
+  "allow_deletions": false
+}

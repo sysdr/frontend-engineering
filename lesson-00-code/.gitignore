@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.tox/
+.coverage
+htmlcov/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets/
+
+# Istio / service mesh local artifacts
+istio-*/
+istioctl
+*.istio.yaml
+istio-install/
+istio-manifests/
+
+# Build / test / cache
+dist/
+build/
+coverage/
+.turbo/
+.cache/
+*.tsbuildinfo
+
+# Logs / OS / editors
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+*.tar

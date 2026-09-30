@@ -1,0 +1,19 @@
+{
+  "name": "pulse-platform",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Lesson 0 — engineering culture and PR-enforced architecture boundaries for the Pulse platform monorepo",
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "build": "node scripts/check-codeowners-coverage.mjs",
+    "dev": "node scripts/demo-review-flow.mjs",
+    "test": "vitest run",
+    "lint": "node scripts/check-codeowners-coverage.mjs",
+    "typecheck": "echo \"Lesson 0 ships plain ESM (no TS surface yet) — typecheck is a no-op until Lesson 5\" && exit 0",
+    "verify": "node scripts/check-codeowners-coverage.mjs && node scripts/validate-pr-description.mjs fixtures/pr-bodies/valid-scoped-pr.md && vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "@pulse/admin",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Pulse admin — scaffolded in Lesson 0, owned by its listed CODEOWNERS team"
+}

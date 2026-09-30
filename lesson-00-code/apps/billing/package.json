@@ -1,0 +1,6 @@
+{
+  "name": "@pulse/billing",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Pulse billing — scaffolded in Lesson 0, owned by its listed CODEOWNERS team"
+}
