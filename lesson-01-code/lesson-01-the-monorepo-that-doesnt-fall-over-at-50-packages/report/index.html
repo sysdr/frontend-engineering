@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pulse run inspector</title>
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>Pulse run inspector</h1>
+      <p class="lede">What turbo actually did on each build, read straight from <code>.turbo/runs</code>.</p>
+    </div>
+    <button type="button" id="reload" class="reload">Reload data</button>
+  </header>
+
+  <main class="layout">
+    <section class="runs" aria-labelledby="runs-h">
+      <h2 id="runs-h">Build runs</h2>
+      <p class="hint">Each bar is one <code>turbo run build</code>. Pick one to colour the graph.</p>
+      <div id="run-strip" class="run-strip" role="listbox" aria-label="Build runs"></div>
+    </section>
+
+    <section class="graph-panel" aria-labelledby="graph-h">
+      <div class="graph-head">
+        <h2 id="graph-h">Package graph</h2>
+        <label class="toggle"><input type="checkbox" id="show-affected"> Outline what git says is affected</label>
+      </div>
+      <p id="affected-note" class="hint"></p>
+      <div class="graph-wrap"><svg id="graph" role="group" aria-label="Package dependency graph"></svg></div>
+      <ul class="legend" aria-label="Legend">
+        <li><span class="swatch hit-local"></span>Cache hit, this machine</li>
+        <li><span class="swatch hit-remote"></span>Cache hit, remote cache</li>
+        <li><span class="swatch miss"></span>Rebuilt (miss)</li>
+        <li><span class="swatch selected"></span>Rebuilds if the selected package changes</li>
+        <li><span class="swatch affected"></span>Affected by your git changes</li>
+      </ul>
+    </section>
+
+    <aside class="side">
+      <section aria-labelledby="blast-h" class="card">
+        <h2 id="blast-h">If this package changes</h2>
+        <div id="blast"><p class="hint">Click a package in the graph.</p></div>
+      </section>
+      <section aria-labelledby="bound-h" class="card">
+        <h2 id="bound-h">Import boundaries</h2>
+        <div id="boundaries"></div>
+      </section>
+    </aside>
+  </main>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

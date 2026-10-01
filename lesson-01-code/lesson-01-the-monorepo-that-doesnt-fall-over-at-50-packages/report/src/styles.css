@@ -1,0 +1,80 @@
+:root {
+  --paper: #eef2f1;
+  --panel: #ffffff;
+  --ink: #17202a;
+  --muted: #56626c;
+  --rule: #cfd8d6;
+  --hit-local: #0e7c66;
+  --hit-remote: #2f5fa7;
+  --miss: #b8660b;
+  --select: #6b3fa0;
+  --radius: 10px;
+  font-family: "Avenir Next", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 24px clamp(16px, 4vw, 48px) 48px; }
+h1 { font-size: 1.75rem; margin: 0; letter-spacing: -0.01em; }
+h2 { font-size: 1.05rem; margin: 0 0 6px; }
+code { font-size: 0.9em; background: #e1e8e6; padding: 1px 5px; border-radius: 4px; }
+.lede, .hint { color: var(--muted); margin: 4px 0 12px; font-size: 0.92rem; }
+.top { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 24px; }
+button { font: inherit; }
+.reload { border: 1px solid var(--ink); background: var(--panel); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.reload:focus-visible, .run:focus-visible, .node:focus-visible { outline: 3px solid var(--select); outline-offset: 2px; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; grid-template-areas: "runs side" "graph side"; gap: 24px; }
+.runs { grid-area: runs; }
+.graph-panel { grid-area: graph; background: var(--panel); border-radius: var(--radius); padding: 20px; border: 1px solid var(--rule); }
+.side { grid-area: side; display: flex; flex-direction: column; gap: 16px; }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); padding: 16px; }
+
+/* The run strip is the one loud element: tall stacked bars, one per run. */
+.run-strip { display: flex; gap: 10px; align-items: flex-end; overflow-x: auto; padding: 4px 2px 8px; }
+.run { display: flex; flex-direction: column; align-items: center; gap: 6px; border: 0; background: none; cursor: pointer; padding: 4px; border-radius: 8px; color: var(--ink); }
+.run[aria-selected="true"] { background: #dde5e3; }
+.bar { width: 44px; height: 132px; display: flex; flex-direction: column-reverse; border-radius: 6px; overflow: hidden; background: #dfe5e3; }
+.bar span { display: block; }
+.run .count { font-weight: 700; font-size: 0.95rem; }
+.run .label { font-size: 0.75rem; color: var(--muted); }
+
+.graph-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.toggle { font-size: 0.9rem; display: flex; gap: 6px; align-items: center; cursor: pointer; }
+.graph-wrap { overflow-x: auto; }
+#graph { width: 100%; min-width: 640px; height: auto; display: block; }
+.edge { stroke: #9aa7a4; stroke-width: 1.5; fill: none; }
+.edge.lit { stroke: var(--select); stroke-width: 2.5; }
+.node { cursor: pointer; }
+.node rect.body { fill: var(--panel); stroke: var(--rule); stroke-width: 1.5; }
+.node.dim { opacity: 0.35; }
+.node.selected rect.body { stroke: var(--ink); stroke-width: 3; }
+.node.impacted rect.body { stroke: var(--select); stroke-width: 3; }
+.node .affected-ring { fill: none; stroke: var(--select); stroke-width: 2; stroke-dasharray: 6 4; }
+.node .name { font-weight: 700; font-size: 15px; fill: var(--ink); }
+.node .meta { font-size: 12px; fill: var(--muted); }
+.node .pill-text { font-size: 11.5px; font-weight: 700; fill: #fff; }
+
+.legend { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 0; margin: 14px 0 0; font-size: 0.85rem; color: var(--muted); }
+.legend li { display: flex; align-items: center; gap: 6px; }
+.swatch { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+.hit-local { background: var(--hit-local); fill: var(--hit-local); }
+.hit-remote { background: var(--hit-remote); fill: var(--hit-remote); }
+.miss { background: var(--miss); fill: var(--miss); }
+.not-run { background: #9aa7a4; fill: #9aa7a4; }
+.swatch.selected { background: none; border: 3px solid var(--select); }
+.swatch.affected { background: none; border: 2px dashed var(--select); }
+
+.blast-count { font-size: 2rem; font-weight: 700; margin: 4px 0 0; }
+.side ul.plain { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 4px; font-size: 0.92rem; }
+.ok { color: var(--hit-local); font-weight: 700; margin: 4px 0; }
+.violation { border-left: 4px solid var(--miss); padding: 6px 10px; background: #fbf1e4; border-radius: 0 6px 6px 0; font-size: 0.86rem; margin-top: 8px; }
+.violation strong { display: block; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: "runs" "graph" "side"; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .node rect.body, .edge { transition: stroke 120ms ease-out, opacity 120ms ease-out; }
+}

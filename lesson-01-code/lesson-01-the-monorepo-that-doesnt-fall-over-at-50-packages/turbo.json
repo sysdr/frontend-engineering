@@ -1,0 +1,20 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "stream",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**", "package.json", "$TURBO_ROOT$/scripts/build-package.mjs"],
+      "outputs": ["dist/**"]
+    },
+    "lint": {
+      "inputs": ["src/**", "package.json", "$TURBO_ROOT$/eslint.config.js", "$TURBO_ROOT$/packages/config/eslint/**"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**", "test/**", "package.json"],
+      "outputs": []
+    }
+  }
+}

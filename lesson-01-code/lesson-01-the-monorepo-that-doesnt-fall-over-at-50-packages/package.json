@@ -1,0 +1,28 @@
+{
+  "name": "pulse-platform",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Lesson 1 — Turborepo task graph, local + remote caching, affected-only builds, and an ESLint rule that enforces package boundaries",
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "build": "turbo run build --summarize",
+    "build:remote": "node scripts/with-remote-cache.mjs run build --summarize",
+    "affected": "turbo run build --affected --summarize",
+    "cache:server": "node scripts/remote-cache-server.mjs",
+    "clean:local": "node scripts/clean-local.mjs",
+    "lint": "turbo run lint && node scripts/check-codeowners-coverage.mjs",
+    "test": "turbo run test && vitest run",
+    "typecheck": "echo \"Lesson 1 ships plain ESM (no TS surface yet) — typecheck is a no-op until Lesson 10\" && exit 0",
+    "report": "node scripts/build-report.mjs",
+    "dev": "node scripts/serve-report.mjs",
+    "hooks:install": "node scripts/install-hooks.mjs",
+    "review:demo": "node scripts/demo-review-flow.mjs",
+    "verify": "pnpm lint && pnpm build && pnpm test"
+  },
+  "devDependencies": {
+    "eslint": "^9.36.0",
+    "turbo": "^2.11.5",
+    "vitest": "^2.1.8"
+  }
+}

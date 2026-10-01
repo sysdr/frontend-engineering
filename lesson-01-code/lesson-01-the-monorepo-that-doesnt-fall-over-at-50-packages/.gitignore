@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+
+# builds and caches
+dist/
+.turbo/
+.next/
+.remote-cache/
+coverage/
+.cache/
+.vite/
+.parcel-cache/
+*.tsbuildinfo
+.eslintcache
+
+# generated inspector output
+report/data/
+
+# local env files
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
