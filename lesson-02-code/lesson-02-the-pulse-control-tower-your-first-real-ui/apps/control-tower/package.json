@@ -1,0 +1,14 @@
+{
+  "name": "@pulse/control-tower",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Pulse Control Tower — plain-DOM dashboard of the platform's own build and ownership signals. Owned by @pulse/platform-team.",
+  "type": "module",
+  "scripts": {
+    "build": "node ../../scripts/build-package.mjs",
+    "lint": "eslint src",
+    "test": "node --test",
+    "dev": "node server/serve.mjs"
+  },
+  "dependencies": {}
+}

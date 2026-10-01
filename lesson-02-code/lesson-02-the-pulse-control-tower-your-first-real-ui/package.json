@@ -1,0 +1,30 @@
+{
+  "name": "pulse-platform",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Lesson 2 — the Pulse Control Tower: a plain-DOM dashboard of turbo's build results and the CODEOWNERS/boundary graph, updated live",
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "build": "turbo run build --summarize",
+    "build:remote": "node scripts/with-remote-cache.mjs run build --summarize",
+    "affected": "turbo run build --affected --summarize",
+    "cache:server": "node scripts/remote-cache-server.mjs",
+    "clean:local": "node scripts/clean-local.mjs",
+    "lint": "turbo run lint && node scripts/check-codeowners-coverage.mjs",
+    "test": "turbo run test && vitest run",
+    "test:e2e": "playwright test",
+    "typecheck": "echo \"Lesson 2 ships plain ESM (no TS surface yet) — typecheck is a no-op until Lesson 10\" && exit 0",
+    "dev": "node apps/control-tower/server/serve.mjs",
+    "hooks:install": "node scripts/install-hooks.mjs",
+    "review:demo": "node scripts/demo-review-flow.mjs",
+    "verify": "pnpm lint && pnpm build && pnpm test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.0",
+    "eslint": "^9.36.0",
+    "jsdom": "^25.0.1",
+    "turbo": "^2.11.5",
+    "vitest": "^2.1.8"
+  }
+}

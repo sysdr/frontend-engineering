@@ -1,0 +1,15 @@
+{
+  "name": "@pulse/analytics",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Pulse analytics app — owned by @pulse/analytics-team",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": { ".": "./dist/index.js" },
+  "scripts": {
+    "build": "node ../../scripts/build-package.mjs",
+    "lint": "eslint src",
+    "test": "node --test"
+  },
+  "dependencies": { "@pulse/contracts": "workspace:*", "@pulse/design-system": "workspace:*" }
+}

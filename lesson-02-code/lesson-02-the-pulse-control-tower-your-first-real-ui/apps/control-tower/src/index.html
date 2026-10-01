@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pulse Control Tower</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <div>
+      <h1>Pulse Control Tower</h1>
+      <p class="lede">The monorepo's own build and ownership signals, drawn instead of printed.</p>
+    </div>
+    <p class="live" data-live data-state="connecting" role="status">Connecting</p>
+  </header>
+
+  <main class="tower">
+    <section class="panel board" data-panel="build-board" aria-labelledby="board-h">
+      <h2 id="board-h">Build board</h2>
+      <p class="run-sentence" data-run-sentence>Loading the latest turbo run.</p>
+      <div class="runs" data-run-strip aria-label="Recent build runs, oldest first"></div>
+      <ul class="strips" data-strips aria-label="Packages in the selected run"></ul>
+      <ul class="key" aria-label="What the colours mean">
+        <li><span class="swatch s-hit-local"></span>Cached here</li>
+        <li><span class="swatch s-hit-remote"></span>Cached, remote</li>
+        <li><span class="swatch s-miss"></span>Rebuilt</li>
+      </ul>
+    </section>
+
+    <section class="panel ownership" data-panel="ownership" aria-labelledby="own-h">
+      <h2 id="own-h">Ownership and boundaries</h2>
+      <div class="teams" data-teams aria-label="CODEOWNERS teams"></div>
+      <div class="graph-wrap">
+        <svg class="graph" data-graph role="group" aria-label="Package dependency graph. Links run from a package down to what it depends on."></svg>
+      </div>
+      <div class="below-graph">
+        <div class="detail" data-detail aria-live="polite"></div>
+        <div class="violations" data-violations></div>
+      </div>
+    </section>
+  </main>
+  <p class="visually-hidden" data-announce aria-live="polite"></p>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+{
+  "generatedAt": "2026-10-01T06:19:29.934Z",
+  "turboVersion": "2.11.6",
+  "packages": [
+    {
+      "name": "@pulse/admin",
+      "dir": "apps/admin",
+      "kind": "app",
+      "owners": [
+        "@pulse/admin-team"
+      ],
+      "dependencies": [
+        "@pulse/contracts",
+        "@pulse/design-system"
+      ],
+      "dependents": []
+    },
+    {
+      "name": "@pulse/analytics",
+      "dir": "apps/analytics",
+      "kind": "app",
+      "owners": [
+        "@pulse/analytics-team"
+      ],
+      "dependencies": [
+        "@pulse/contracts",
+        "@pulse/design-system"
+      ],
+      "dependents": []
+    },
+    {
+      "name": "@pulse/billing",
+      "dir": "apps/billing",
+      "kind": "app",
+      "owners": [
+        "@pulse/billing-team"
+      ],
+      "dependencies": [
+        "@pulse/contracts",
+        "@pulse/design-system"
+      ],
+      "dependents": []
+    },
+    {
+      "name": "@pulse/config",
+      "dir": "packages/config",
+      "kind": "shared",
+      "owners": [
+        "@pulse/platform-team",
+        "@pulse/billing-team",
+        "@pulse/analytics-team",
+        "@pulse/admin-team"
+      ],
+      "dependencies": [],
+      "dependents": [
+        "@pulse/design-system"
+      ]
+    },
+    {
+      "name": "@pulse/contracts",
+      "dir": "packages/contracts",
+      "kind": "shared",
+      "owners": [
+        "@pulse/platform-team",
+        "@pulse/billing-team",
+        "@pulse/analytics-team",
+        "@pulse/admin-team"
+      ],
+      "dependencies": [],
+      "dependents": [
+        "@pulse/admin",
+        "@pulse/analytics",
+        "@pulse/billing"
+      ]
+    },
+    {
+      "name": "@pulse/control-tower",
+      "dir": "apps/control-tower",
+      "kind": "app",
+      "owners": [
+        "@pulse/platform-team"
+      ],
+      "dependencies": [],
+      "dependents": []
+    },
+    {
+      "name": "@pulse/design-system",
+      "dir": "packages/design-system",
+      "kind": "shared",
+      "owners": [
+        "@pulse/platform-team",
+        "@pulse/billing-team",
+        "@pulse/analytics-team",
+        "@pulse/admin-team"
+      ],
+      "dependencies": [
+        "@pulse/config"
+      ],
+      "dependents": [
+        "@pulse/admin",
+        "@pulse/analytics",
+        "@pulse/billing",
+        "@pulse/shell"
+      ]
+    },
+    {
+      "name": "@pulse/shell",
+      "dir": "apps/shell",
+      "kind": "app",
+      "owners": [
+        "@pulse/platform-team"
+      ],
+      "dependencies": [
+        "@pulse/design-system"
+      ],
+      "dependents": []
+    }
+  ],
+  "teams": [
+    {
+      "team": "@pulse/admin-team",
+      "packages": [
+        "@pulse/admin",
+        "@pulse/config",
+        "@pulse/contracts",
+        "@pulse/design-system"
+      ]
+    },
+    {
+      "team": "@pulse/analytics-team",
+      "packages": [
+        "@pulse/analytics",
+        "@pulse/config",
+        "@pulse/contracts",
+        "@pulse/design-system"
+      ]
+    },
+    {
+      "team": "@pulse/billing-team",
+      "packages": [
+        "@pulse/billing",
+        "@pulse/config",
+        "@pulse/contracts",
+        "@pulse/design-system"
+      ]
+    },
+    {
+      "team": "@pulse/platform-team",
+      "packages": [
+        "@pulse/config",
+        "@pulse/contracts",
+        "@pulse/control-tower",
+        "@pulse/design-system",
+        "@pulse/shell"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "3K57F87IXRyWbMCaJaxyxfxiuHx",
+      "command": "turbo run build",
+      "startTime": 1790835464633,
+      "endTime": 1790835468139,
+      "durationMs": 3506,
+      "exitCode": 0,
+      "tasks": [
+        {
+          "package": "@pulse/admin",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1667,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/analytics",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1681,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/billing",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1674,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/config",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1253,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/contracts",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1261,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/control-tower",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1273,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/design-system",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 393,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/shell",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1663,
+          "timeSavedMs": 0
+        }
+      ]
+    },
+    {
+      "id": "3K57GpSAZ3rQgoFA2vSFqDly039",
+      "command": "turbo run build",
+      "startTime": 1790835481384,
+      "endTime": 1790835481403,
+      "durationMs": 19,
+      "exitCode": 0,
+      "tasks": [
+        {
+          "package": "@pulse/admin",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 1666
+        },
+        {
+          "package": "@pulse/analytics",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 1680
+        },
+        {
+          "package": "@pulse/billing",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 1673
+        },
+        {
+          "package": "@pulse/config",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 1252
+        },
+        {
+          "package": "@pulse/contracts",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 1260
+        },
+        {
+          "package": "@pulse/control-tower",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 1272
+        },
+        {
+          "package": "@pulse/design-system",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 393
+        },
+        {
+          "package": "@pulse/shell",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 2,
+          "timeSavedMs": 1662
+        }
+      ]
+    },
+    {
+      "id": "3K57NU9h9nOA2lmVRx8VKnbeUip",
+      "command": "turbo run build",
+      "startTime": 1790835532401,
+      "endTime": 1790835534957,
+      "durationMs": 2556,
+      "exitCode": 0,
+      "tasks": [
+        {
+          "package": "@pulse/admin",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 6,
+          "timeSavedMs": 1666
+        },
+        {
+          "package": "@pulse/analytics",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 2,
+          "timeSavedMs": 1680
+        },
+        {
+          "package": "@pulse/billing",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 2131,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/config",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 3,
+          "timeSavedMs": 1252
+        },
+        {
+          "package": "@pulse/contracts",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 3,
+          "timeSavedMs": 1260
+        },
+        {
+          "package": "@pulse/control-tower",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 2164,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/design-system",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 393
+        },
+        {
+          "package": "@pulse/shell",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 2,
+          "timeSavedMs": 1662
+        }
+      ]
+    },
+    {
+      "id": "3K57QDajXJseekHDAmUnxVCTe6w",
+      "command": "turbo run build",
+      "startTime": 1790835556156,
+      "endTime": 1790835556239,
+      "durationMs": 83,
+      "exitCode": 0,
+      "tasks": [
+        {
+          "package": "@pulse/admin",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 1666
+        },
+        {
+          "package": "@pulse/analytics",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 1680
+        },
+        {
+          "package": "@pulse/billing",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 2,
+          "timeSavedMs": 1673
+        },
+        {
+          "package": "@pulse/config",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 1252
+        },
+        {
+          "package": "@pulse/contracts",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 1260
+        },
+        {
+          "package": "@pulse/control-tower",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 0,
+          "timeSavedMs": 2163
+        },
+        {
+          "package": "@pulse/design-system",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 1,
+          "timeSavedMs": 393
+        },
+        {
+          "package": "@pulse/shell",
+          "status": "HIT",
+          "source": "LOCAL",
+          "durationMs": 1,
+          "timeSavedMs": 1662
+        }
+      ]
+    },
+    {
+      "id": "3K57QXeAqFuKSwOBwHvPsbhyorV",
+      "command": "turbo run build",
+      "startTime": 1790835556381,
+      "endTime": 1790835559962,
+      "durationMs": 3581,
+      "exitCode": 0,
+      "tasks": [
+        {
+          "package": "@pulse/admin",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1818,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/analytics",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1821,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/billing",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1807,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/config",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1266,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/contracts",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1287,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/control-tower",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1312,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/design-system",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 454,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/shell",
+          "status": "MISS",
+          "source": null,
+          "durationMs": 1832,
+          "timeSavedMs": 0
+        }
+      ]
+    },
+    {
+      "id": "3K57Rp3KAc6f1vnpXr2Yhfs99qN",
+      "command": "turbo run build",
+      "startTime": 1790835569313,
+      "endTime": 1790835569603,
+      "durationMs": 290,
+      "exitCode": 0,
+      "tasks": [
+        {
+          "package": "@pulse/admin",
+          "status": "HIT",
+          "source": "REMOTE",
+          "durationMs": 7,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/analytics",
+          "status": "HIT",
+          "source": "REMOTE",
+          "durationMs": 7,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/billing",
+          "status": "HIT",
+          "source": "REMOTE",
+          "durationMs": 7,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/config",
+          "status": "HIT",
+          "source": "REMOTE",
+          "durationMs": 143,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/contracts",
+          "status": "HIT",
+          "source": "REMOTE",
+          "durationMs": 148,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/control-tower",
+          "status": "HIT",
+          "source": "REMOTE",
+          "durationMs": 143,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/design-system",
+          "status": "HIT",
+          "source": "REMOTE",
+          "durationMs": 3,
+          "timeSavedMs": 0
+        },
+        {
+          "package": "@pulse/shell",
+          "status": "HIT",
+          "source": "REMOTE",
+          "durationMs": 8,
+          "timeSavedMs": 0
+        }
+      ]
+    }
+  ],
+  "boundaryViolations": []
+}

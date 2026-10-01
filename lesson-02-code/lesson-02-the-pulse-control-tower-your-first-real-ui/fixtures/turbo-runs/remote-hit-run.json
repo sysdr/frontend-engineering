@@ -1,0 +1,218 @@
+{
+  "id": "3K57Rp3KAc6f1vnpXr2Yhfs99qN",
+  "version": "1",
+  "turboVersion": "2.11.6",
+  "execution": {
+    "command": "turbo run build",
+    "repoPath": "",
+    "success": 0,
+    "failed": 0,
+    "cached": 8,
+    "attempted": 8,
+    "startTime": 1790835569313,
+    "endTime": 1790835569603,
+    "exitCode": 0
+  },
+  "tasks": [
+    {
+      "taskId": "@pulse/admin#build",
+      "task": "build",
+      "package": "@pulse/admin",
+      "hash": "2d3cc398bf524a41",
+      "cache": {
+        "local": false,
+        "remote": true,
+        "status": "HIT",
+        "source": "REMOTE",
+        "timeSaved": 0
+      },
+      "command": "node ../../scripts/build-package.mjs",
+      "directory": "apps/admin",
+      "dependencies": [
+        "@pulse/contracts#build",
+        "@pulse/design-system#build"
+      ],
+      "dependents": [],
+      "execution": {
+        "startTime": 1790835569596,
+        "endTime": 1790835569603,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "@pulse/analytics#build",
+      "task": "build",
+      "package": "@pulse/analytics",
+      "hash": "ace487b03e8e1e68",
+      "cache": {
+        "local": false,
+        "remote": true,
+        "status": "HIT",
+        "source": "REMOTE",
+        "timeSaved": 0
+      },
+      "command": "node ../../scripts/build-package.mjs",
+      "directory": "apps/analytics",
+      "dependencies": [
+        "@pulse/contracts#build",
+        "@pulse/design-system#build"
+      ],
+      "dependents": [],
+      "execution": {
+        "startTime": 1790835569596,
+        "endTime": 1790835569603,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "@pulse/billing#build",
+      "task": "build",
+      "package": "@pulse/billing",
+      "hash": "ca2a576ca42ee868",
+      "cache": {
+        "local": false,
+        "remote": true,
+        "status": "HIT",
+        "source": "REMOTE",
+        "timeSaved": 0
+      },
+      "command": "node ../../scripts/build-package.mjs",
+      "directory": "apps/billing",
+      "dependencies": [
+        "@pulse/contracts#build",
+        "@pulse/design-system#build"
+      ],
+      "dependents": [],
+      "execution": {
+        "startTime": 1790835569596,
+        "endTime": 1790835569603,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "@pulse/config#build",
+      "task": "build",
+      "package": "@pulse/config",
+      "hash": "163c95b73c239be5",
+      "cache": {
+        "local": false,
+        "remote": true,
+        "status": "HIT",
+        "source": "REMOTE",
+        "timeSaved": 0
+      },
+      "command": "node ../../scripts/build-package.mjs",
+      "directory": "packages/config",
+      "dependencies": [],
+      "dependents": [
+        "@pulse/design-system#build"
+      ],
+      "execution": {
+        "startTime": 1790835569449,
+        "endTime": 1790835569592,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "@pulse/contracts#build",
+      "task": "build",
+      "package": "@pulse/contracts",
+      "hash": "9f4c63540c715c70",
+      "cache": {
+        "local": false,
+        "remote": true,
+        "status": "HIT",
+        "source": "REMOTE",
+        "timeSaved": 0
+      },
+      "command": "node ../../scripts/build-package.mjs",
+      "directory": "packages/contracts",
+      "dependencies": [],
+      "dependents": [
+        "@pulse/admin#build",
+        "@pulse/analytics#build",
+        "@pulse/billing#build"
+      ],
+      "execution": {
+        "startTime": 1790835569448,
+        "endTime": 1790835569596,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "@pulse/control-tower#build",
+      "task": "build",
+      "package": "@pulse/control-tower",
+      "hash": "8ae00b3f729768b9",
+      "cache": {
+        "local": false,
+        "remote": true,
+        "status": "HIT",
+        "source": "REMOTE",
+        "timeSaved": 0
+      },
+      "command": "node ../../scripts/build-package.mjs",
+      "directory": "apps/control-tower",
+      "dependencies": [],
+      "dependents": [],
+      "execution": {
+        "startTime": 1790835569449,
+        "endTime": 1790835569592,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "@pulse/design-system#build",
+      "task": "build",
+      "package": "@pulse/design-system",
+      "hash": "7a7ad968992cef91",
+      "cache": {
+        "local": false,
+        "remote": true,
+        "status": "HIT",
+        "source": "REMOTE",
+        "timeSaved": 0
+      },
+      "command": "node ../../scripts/build-package.mjs",
+      "directory": "packages/design-system",
+      "dependencies": [
+        "@pulse/config#build"
+      ],
+      "dependents": [
+        "@pulse/admin#build",
+        "@pulse/analytics#build",
+        "@pulse/billing#build",
+        "@pulse/shell#build"
+      ],
+      "execution": {
+        "startTime": 1790835569592,
+        "endTime": 1790835569595,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "@pulse/shell#build",
+      "task": "build",
+      "package": "@pulse/shell",
+      "hash": "cbe51eff63be5429",
+      "cache": {
+        "local": false,
+        "remote": true,
+        "status": "HIT",
+        "source": "REMOTE",
+        "timeSaved": 0
+      },
+      "command": "node ../../scripts/build-package.mjs",
+      "directory": "apps/shell",
+      "dependencies": [
+        "@pulse/design-system#build"
+      ],
+      "dependents": [],
+      "execution": {
+        "startTime": 1790835569595,
+        "endTime": 1790835569603,
+        "exitCode": 0
+      }
+    }
+  ]
+}
