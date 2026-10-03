@@ -1,0 +1,3 @@
+{ "name": "@pulse/control-tower", "version": "0.4.0", "private": true, "type": "module", "main": "./src/main.js",
+  "dependencies": { "@pulse/design-system": "workspace:*", "@pulse/api-client": "workspace:*" }, "pulse": { "browserOnly": true },
+  "scripts": { "build": "node ../../scripts/build-package.mjs", "test": "node ../../scripts/smoke-package.mjs" } }

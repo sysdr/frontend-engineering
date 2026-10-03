@@ -1,0 +1,81 @@
+/* The invoice list. Type from scale roles (Lesson 3), colour from colour
+   roles (Lesson 4). There is no colour value anywhere in this file. */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--pulse-color-border);
+  background: var(--pulse-color-surface-raised);
+}
+
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.page h1 { margin: 0; }
+
+.totals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px 20px;
+  border: 1px solid var(--pulse-color-border);
+  border-radius: 12px;
+  background: var(--pulse-color-surface-raised);
+}
+.total .amount { font-variant-numeric: tabular-nums; }
+
+.toolbar { display: flex; align-items: center; gap: 12px; }
+.toolbar select {
+  font: inherit;
+  color: var(--pulse-color-text);
+  background: var(--pulse-color-surface-raised);
+  border: 1px solid var(--pulse-color-border-strong);
+  border-radius: 8px;
+  padding: 4px 10px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--pulse-color-border);
+  border-radius: 12px;
+  background: var(--pulse-color-surface-raised);
+}
+.invoices { width: 100%; border-collapse: collapse; }
+.invoices th {
+  text-align: start;
+  padding: 8px 16px;
+  background: var(--pulse-color-surface-sunken);
+  color: var(--pulse-color-text-muted);
+  font-size: var(--pulse-font-size-caption);
+  line-height: var(--pulse-line-height-caption);
+  font-weight: 600;
+}
+.invoices td { padding: 10px 16px; border-top: 1px solid var(--pulse-color-border); white-space: nowrap; }
+.invoices .num { text-align: end; font-variant-numeric: tabular-nums; }
+.invoices .id { font-weight: 600; }
+
+.sort {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.sort[data-active="true"] { color: var(--pulse-color-accent-strong); }
+.sort[data-active="true"]::after { content: " ↕"; }
+th[aria-sort="ascending"] .sort::after { content: " ↑"; }
+th[aria-sort="descending"] .sort::after { content: " ↓"; }
+
+@media (max-width: 640px) {
+  .totals { grid-template-columns: 1fr; }
+}

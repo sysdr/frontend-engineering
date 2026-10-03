@@ -1,0 +1,118 @@
+/* Control Tower layout. Every colour is a role; every size is a scale role.
+   (Spacing becomes tokens in Lesson 5.) */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--pulse-color-border);
+  background: var(--pulse-color-surface-raised);
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.topbar nav { margin-inline-start: auto; }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  padding: 24px;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+.panel {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--pulse-color-border);
+  border-radius: 14px;
+  background: var(--pulse-color-surface-raised);
+}
+.panel--wide { grid-column: 1 / -1; }
+.panel h2 { margin: 0; }
+.panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.panel p { margin: 4px 0 12px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Build board */
+.cards { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid var(--pulse-color-border);
+  border-radius: 10px;
+  background: var(--pulse-color-surface);
+}
+.card-name { font-weight: 600; }
+.card-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 8px; margin-top: 6px; }
+.pulse-badge:not([data-tone]) { background: var(--pulse-color-surface-sunken); color: var(--pulse-color-text-muted); }
+
+/* Ownership graph */
+.graph-wrap { overflow-x: auto; margin-top: 8px; }
+.graph { width: 100%; max-width: 560px; min-width: 360px; height: auto; display: block; margin: 0 auto; }
+.edge { stroke: var(--pulse-color-border-strong); stroke-width: 1.5; }
+.edge.is-active { stroke: var(--pulse-color-accent); stroke-width: 2.5; }
+.node { cursor: pointer; }
+.node rect { fill: var(--pulse-color-surface); stroke: var(--pulse-color-border-strong); stroke-width: 1.5; }
+.node text { fill: var(--pulse-color-text); font-size: var(--pulse-font-size-caption); font-weight: 600; }
+.node.is-team rect { fill: var(--pulse-color-surface-sunken); stroke: var(--pulse-color-accent); }
+.node.is-selected rect { fill: var(--pulse-color-accent); stroke: var(--pulse-color-accent); }
+.node.is-selected text { fill: var(--pulse-color-on-accent); }
+.node:focus { outline: none; }
+.node:focus-visible rect { stroke: var(--pulse-color-focus-ring); stroke-width: 3; }
+
+/* Contrast audit */
+.gate { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 0 12px; }
+.gate-lines { flex-basis: 100%; margin: 4px 0 0; padding-inline-start: 20px; color: var(--pulse-color-danger-text); }
+.gate--warn { color: var(--pulse-color-warning-text); }
+.table-scroll { overflow-x: auto; }
+.audit { width: 100%; border-collapse: collapse; }
+.audit th, .audit td { padding: 8px 12px; text-align: start; border-top: 1px solid var(--pulse-color-border); vertical-align: middle; }
+.audit thead th {
+  border-top: 0;
+  background: var(--pulse-color-surface-sunken);
+  color: var(--pulse-color-text-muted);
+  font-size: var(--pulse-font-size-caption);
+  line-height: var(--pulse-line-height-caption);
+}
+.audit .num { text-align: end; }
+.audit tbody th { font-weight: 400; }
+.pair-name { display: block; font-weight: 600; }
+.cell { display: inline-flex; align-items: center; gap: 10px; }
+.ratio { min-width: 4.6em; font-variant-numeric: tabular-nums; font-weight: 600; }
+.audit td[data-state="fail"] { background: var(--pulse-color-danger-surface); }
+.audit td[data-state="fail"] .ratio { color: var(--pulse-color-danger-text); }
+
+/* The sample swatch: a real element painted in the pair, inside its own
+   theme. data-theme on the swatch is what makes both themes render at once. */
+.contrast-sample {
+  display: inline-grid;
+  place-items: center;
+  width: 52px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--pulse-color-border);
+  font-weight: 600;
+}
+.contrast-sample--ui { border: 3px solid var(--fg); }
+
+/* Type scale (compact, from Lesson 3) */
+.type-list { list-style: none; margin: 0; padding: 0; }
+.type-list li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) auto auto;
+  align-items: baseline;
+  gap: 16px;
+  padding: 6px 0;
+  border-top: 1px solid var(--pulse-color-border);
+}
+.type-list .role { color: var(--pulse-color-text-muted); }
+.specimen { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+@media (max-width: 900px) {
+  .board { grid-template-columns: 1fr; padding: 16px; }
+  .topbar { flex-wrap: wrap; gap: 12px; }
+}

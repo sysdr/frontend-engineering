@@ -1,0 +1,143 @@
+// The colour system, in two layers.
+//
+//   palette  raw colours with neutral names. This folder is the only place in
+//            the repo allowed to hold a colour literal (pulse/no-raw-color).
+//   roles    what a colour is FOR. Each role names one palette entry per
+//            theme. Components use roles through var(--pulse-color-<role>).
+//
+// A theme is a choice of palette entry per role. Changing it touches this
+// file and nothing else.
+
+/** @typedef {"light" | "dark"} ThemeName */
+/** @typedef {{ light: string, dark: string }} RoleDef */
+/** @typedef {{ fg: string, bg: string, kind: "text" | "large-text" | "ui", use: string }} Pair */
+
+/** @type {readonly ThemeName[]} */
+export const THEMES = Object.freeze(["light", "dark"]);
+
+/** @type {Readonly<Record<string, string>>} */
+export const palette = Object.freeze({
+  "slate-0": "#ffffff",
+  "slate-50": "#f4f6f9",
+  "slate-100": "#e8ecf2",
+  "slate-200": "#d3dae4",
+  "slate-400": "#8b97aa",
+  "slate-500": "#6b778b",
+  "slate-600": "#4b576a",
+  "slate-700": "#344052",
+  "slate-800": "#232d3c",
+  "slate-850": "#1b2431",
+  "slate-900": "#141c27",
+  "slate-950": "#0d131c",
+  "blue-200": "#b9d3ff",
+  "blue-300": "#8cb8ff",
+  "blue-600": "#1f5fbf",
+  "blue-700": "#184c99",
+  "green-100": "#ddf3e5",
+  "green-300": "#7fd6a0",
+  "green-700": "#1e7a45",
+  "green-900": "#13321f",
+  "amber-100": "#fcebcb",
+  "amber-300": "#f5c16c",
+  "amber-700": "#8a5300",
+  "amber-900": "#3a2909",
+  "red-100": "#fde2df",
+  "red-300": "#ff9f97",
+  "red-700": "#b42318",
+  "red-900": "#43150f",
+});
+
+/** @type {Readonly<Record<string, RoleDef>>} */
+export const roles = Object.freeze({
+  surface: { light: "slate-50", dark: "slate-950" },
+  "surface-raised": { light: "slate-0", dark: "slate-900" },
+  "surface-sunken": { light: "slate-100", dark: "slate-850" },
+  border: { light: "slate-200", dark: "slate-800" },
+  "border-strong": { light: "slate-500", dark: "slate-400" },
+  text: { light: "slate-900", dark: "slate-50" },
+  "text-muted": { light: "slate-600", dark: "slate-400" },
+  accent: { light: "blue-600", dark: "blue-300" },
+  "accent-strong": { light: "blue-700", dark: "blue-200" },
+  "on-accent": { light: "slate-0", dark: "slate-950" },
+  "focus-ring": { light: "blue-600", dark: "blue-300" },
+  "success-surface": { light: "green-100", dark: "green-900" },
+  "success-text": { light: "green-700", dark: "green-300" },
+  "warning-surface": { light: "amber-100", dark: "amber-900" },
+  "warning-text": { light: "amber-700", dark: "amber-300" },
+  "danger-surface": { light: "red-100", dark: "red-900" },
+  "danger-text": { light: "red-700", dark: "red-300" },
+});
+
+/**
+ * Every foreground-on-background combination the UI draws, and the WCAG
+ * level it must meet. The audit checks each one in both themes. When a
+ * component puts one role on another, its pair belongs in this list.
+ * @type {readonly Pair[]}
+ */
+export const pairs = Object.freeze([
+  { fg: "text", bg: "surface", kind: "text", use: "Page text" },
+  { fg: "text", bg: "surface-raised", kind: "text", use: "Panel text" },
+  { fg: "text", bg: "surface-sunken", kind: "text", use: "Table header text" },
+  { fg: "text-muted", bg: "surface", kind: "text", use: "Captions on the page" },
+  { fg: "text-muted", bg: "surface-raised", kind: "text", use: "Captions in panels" },
+  { fg: "text-muted", bg: "surface-sunken", kind: "text", use: "Muted table headers" },
+  { fg: "accent", bg: "surface-raised", kind: "text", use: "Links in panels" },
+  { fg: "accent-strong", bg: "surface-sunken", kind: "text", use: "Sorted column header" },
+  { fg: "on-accent", bg: "accent", kind: "text", use: "Selected theme button" },
+  { fg: "focus-ring", bg: "surface-raised", kind: "ui", use: "Keyboard focus ring" },
+  { fg: "border-strong", bg: "surface-raised", kind: "ui", use: "Control borders" },
+  { fg: "success-text", bg: "success-surface", kind: "text", use: "Paid, cache hit" },
+  { fg: "warning-text", bg: "warning-surface", kind: "text", use: "Open, cache miss" },
+  { fg: "danger-text", bg: "danger-surface", kind: "text", use: "Overdue, failed" },
+]);
+
+/**
+ * The hex value a role resolves to in one theme.
+ * @param {string} role
+ * @param {ThemeName} theme
+ */
+export function resolveRole(role, theme) {
+  const def = roles[role];
+  if (!def) throw new Error(`Unknown colour role "${role}"`);
+  const hex = palette[def[theme]];
+  if (!hex) throw new Error(`Role "${role}" (${theme}) points at missing palette entry "${def[theme]}"`);
+  return hex;
+}
+
+/** @param {string} role */
+export const cssVar = (role) => `--pulse-color-${role}`;
+
+/**
+ * @param {ThemeName} theme
+ * @param {string} indent
+ */
+function declarations(theme, indent) {
+  return Object.keys(roles)
+    .map((role) => `${indent}${cssVar(role)}: ${resolveRole(role, theme)};`)
+    .join("\n");
+}
+
+/** The stylesheet scripts/generate-tokens.mjs writes to colors.css. */
+export function colorsCss() {
+  return `/* GENERATED by scripts/generate-tokens.mjs from tokens/colors.js. Do not edit. */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+${declarations("light", "  ")}
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+${declarations("dark", "  ")}
+}
+
+/* Before any script runs, follow the OS unless the page forced light. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+${declarations("dark", "    ")}
+  }
+}
+`;
+}

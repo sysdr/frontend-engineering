@@ -1,0 +1,21 @@
+{
+  // Plain ESM with JSDoc types, checked by tsc. The design-system's logic
+  // (tokens, contrast maths, audit, theme controller) and billing's data are
+  // type-checked; DOM panel code joins in Lesson 10's TypeScript migration.
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "types": []
+  },
+  "include": [
+    "packages/design-system/src/**/*.js",
+    "apps/billing/src/index.js"
+  ]
+}

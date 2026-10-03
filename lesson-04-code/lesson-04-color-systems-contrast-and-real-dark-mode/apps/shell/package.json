@@ -1,0 +1,3 @@
+{ "name": "@pulse/shell", "version": "0.4.0", "private": true, "type": "module", "main": "./src/index.js",
+  "dependencies": { "@pulse/design-system": "workspace:*" }, "pulse": { "browserOnly": true },
+  "scripts": { "build": "node ../../scripts/build-package.mjs", "test": "node ../../scripts/smoke-package.mjs" } }

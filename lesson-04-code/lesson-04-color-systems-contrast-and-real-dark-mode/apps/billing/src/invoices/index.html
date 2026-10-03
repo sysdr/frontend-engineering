@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Invoices · Pulse Billing</title>
+    <!-- Set the theme before first paint so a dark-mode user never sees a white flash. -->
+    <script>
+      try {
+        const c = localStorage.getItem("pulse:theme");
+        const dark = c === "dark" || ((c === null || c === "system") && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+      } catch {}
+    </script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@pulse/design-system": "/packages/design-system/src/index.js",
+          "@pulse/design-system/": "/packages/design-system/src/",
+          "@pulse/utils": "/packages/utils/src/index.js"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="/packages/design-system/src/tokens/typography.css" />
+    <link rel="stylesheet" href="/packages/design-system/src/tokens/colors.css" data-colors-sheet />
+    <link rel="stylesheet" href="/packages/design-system/src/base.css" />
+    <link rel="stylesheet" href="./invoices.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="pulse-text-caption" href="/">Control Tower</a>
+      <div data-theme-slot></div>
+    </header>
+    <main class="page">
+      <h1 class="pulse-text-headline">Invoices</h1>
+      <section class="totals" aria-label="Totals" data-totals></section>
+      <div class="toolbar">
+        <label class="pulse-text-caption" for="status-filter">Show</label>
+        <select id="status-filter" data-filter>
+          <option value="all">All invoices</option>
+          <option value="open">Open</option>
+          <option value="overdue">Overdue</option>
+          <option value="paid">Paid</option>
+        </select>
+        <span class="pulse-muted pulse-text-caption" data-count aria-live="polite"></span>
+      </div>
+      <div class="table-wrap">
+        <table class="invoices">
+          <thead><tr data-head></tr></thead>
+          <tbody data-rows></tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>
