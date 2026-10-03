@@ -1,0 +1,32 @@
+{
+  "name": "pulse-platform",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Lesson 3 — typography as a system: a modular type scale, a billing invoice list built only from it, and a lint rule that fails on any font-size outside the token file",
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "build": "turbo run build --summarize",
+    "build:remote": "node scripts/with-remote-cache.mjs run build --summarize",
+    "affected": "turbo run build --affected --summarize",
+    "cache:server": "node scripts/remote-cache-server.mjs",
+    "clean:local": "node scripts/clean-local.mjs",
+    "tokens": "node scripts/generate-tokens.mjs",
+    "lint": "turbo run lint && node scripts/check-codeowners-coverage.mjs && node scripts/generate-tokens.mjs --check",
+    "test": "turbo run test && vitest run",
+    "test:e2e": "playwright test",
+    "typecheck": "echo \"Lesson 3 ships plain ESM (no TS surface yet) — typecheck is a no-op until Lesson 10\" && exit 0",
+    "dev": "node apps/control-tower/server/serve.mjs",
+    "hooks:install": "node scripts/install-hooks.mjs",
+    "review:demo": "node scripts/demo-review-flow.mjs",
+    "verify": "pnpm lint && pnpm build && pnpm test"
+  },
+  "devDependencies": {
+    "@eslint/css": "^1.4.0",
+    "@playwright/test": "1.56.0",
+    "eslint": "^9.36.0",
+    "jsdom": "^25.0.1",
+    "turbo": "^2.11.5",
+    "vitest": "^2.1.8"
+  }
+}

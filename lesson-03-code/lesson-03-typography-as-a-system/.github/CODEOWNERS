@@ -1,0 +1,32 @@
+# Pulse platform CODEOWNERS — carried forward from Lesson 0, extended in Lessons 1 and 2
+#
+# Rule this file encodes (see Lesson 0, "The architecture decision"):
+#   - A change inside ONE package's boundary needs only that package's owning
+#     team's approval.
+#   - A change to a SHARED package (design-system, contracts, config) needs
+#     sign-off from EVERY team that consumes it — listing multiple teams on
+#     one line requires all of them, which is exactly the enforcement we want.
+#
+# scripts/check-codeowners-coverage.mjs fails CI if any apps/* or packages/*
+# directory is missing from this file, so boundary drift can't go unnoticed.
+# Lesson 2: the Control Tower reads this file to draw its ownership graph.
+
+# --- App packages: single-team owned ---
+apps/shell/               @pulse/platform-team
+apps/billing/              @pulse/billing-team
+apps/analytics/            @pulse/analytics-team
+apps/admin/                @pulse/admin-team
+# Lesson 2: the Control Tower is platform tooling with a UI
+apps/control-tower/        @pulse/platform-team
+
+# --- Shared packages: every consuming team must approve ---
+packages/design-system/    @pulse/platform-team @pulse/billing-team @pulse/analytics-team @pulse/admin-team
+packages/contracts/        @pulse/platform-team @pulse/billing-team @pulse/analytics-team @pulse/admin-team
+packages/config/           @pulse/platform-team @pulse/billing-team @pulse/analytics-team @pulse/admin-team
+
+# --- Platform tooling: platform team only ---
+scripts/                   @pulse/platform-team
+.github/                   @pulse/platform-team
+# Lesson 1: the build graph and the boundary rule are platform-owned too
+turbo.json                 @pulse/platform-team
+eslint.config.js           @pulse/platform-team

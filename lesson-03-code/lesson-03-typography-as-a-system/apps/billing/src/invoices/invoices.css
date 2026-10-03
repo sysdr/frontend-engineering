@@ -1,0 +1,102 @@
+/* Pulse Billing — invoice list (Lesson 3).
+   Not one font-size in this file is a number: every text size is a role
+   from the type scale, either through a .pulse-text-<role> class in the
+   markup or a var(--pulse-font-size-<role>) here. `pnpm lint` enforces it. */
+:root {
+  --page: #eef1f4;
+  --surface: #ffffff;
+  --ink: #17212e;
+  --muted: #536173;
+  --rule: #d3dae2;
+  --accent: #155e75;
+  --accent-tint: #e0eff4;
+  --paid: #17663f;
+  --paid-tint: #e3f2e9;
+  --open: #1f4f8f;
+  --open-tint: #e4ecf7;
+  --overdue: #8f4300;
+  --overdue-tint: #fbebd9;
+  --idle: #5b6573;
+  --idle-tint: #edf0f3;
+  font-family: var(--pulse-font-family-sans);
+  font-size: var(--pulse-font-size-body);
+  line-height: var(--pulse-line-height-body);
+  color: var(--ink);
+  background: var(--page);
+  font-variant-numeric: tabular-nums;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+h1, h2, p { margin: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px clamp(16px, 4vw, 48px); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.brand { font-weight: var(--pulse-font-weight-subheading); color: var(--accent); }
+.as-of { color: var(--muted); }
+
+.page { max-width: 1120px; margin: 0 auto; padding: 32px clamp(16px, 4vw, 48px) 56px; display: flex; flex-direction: column; gap: 24px; }
+.page-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+.audit-toggle { border: 1px solid var(--rule); background: var(--surface); border-radius: 8px; padding: 8px 16px; cursor: pointer; }
+.audit-toggle[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-tint); color: var(--accent); font-weight: var(--pulse-font-weight-subheading); }
+
+.figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.figure { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 16px 20px; display: flex; flex-direction: column; gap: 4px; }
+.figure > p:first-child { color: var(--muted); }
+.figure.overdue { border-color: var(--overdue); background: var(--overdue-tint); }
+.figure.overdue .amount { color: var(--overdue); }
+
+.list { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.list-head { display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; }
+.views { display: flex; flex-wrap: wrap; gap: 4px; background: var(--idle-tint); border-radius: 10px; padding: 4px; }
+.view { display: inline-flex; align-items: baseline; gap: 8px; border: 0; background: none; border-radius: 7px; padding: 4px 12px; cursor: pointer; }
+.view .count { font-size: var(--pulse-font-size-caption); line-height: var(--pulse-line-height-caption); color: var(--muted); }
+.view[aria-pressed="true"] { background: var(--surface); box-shadow: 0 1px 2px rgb(23 33 46 / 0.16); font-weight: var(--pulse-font-weight-subheading); }
+
+.table-wrap { overflow-x: auto; }
+.invoices { width: 100%; border-collapse: collapse; min-width: 720px; }
+.invoices th { text-align: left; color: var(--muted); padding: 0 12px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.invoices th button { border: 0; background: none; padding: 0; cursor: pointer; font-weight: inherit; display: inline-flex; gap: 4px; align-items: center; }
+.invoices th button::after { content: ""; width: 0; height: 0; border: 4px solid transparent; opacity: 0; }
+.invoices th[aria-sort="ascending"] button::after { border-bottom-color: currentColor; margin-top: -4px; opacity: 1; }
+.invoices th[aria-sort="descending"] button::after { border-top-color: currentColor; margin-top: 4px; opacity: 1; }
+.invoices td { padding: 12px; border-bottom: 1px solid var(--idle-tint); white-space: nowrap; }
+.invoices tbody tr:hover { background: #f7f9fb; }
+.invoices .num { text-align: right; }
+.invoices .id { font-weight: var(--pulse-font-weight-subheading); }
+.invoices .customer { white-space: normal; min-width: 14em; }
+.invoices .date { color: var(--muted); }
+
+.badge { display: inline-block; border-radius: 999px; padding: 2px 10px; background: var(--b-tint); color: var(--b-ink); }
+.b-paid { --b-tint: var(--paid-tint); --b-ink: var(--paid); }
+.b-open { --b-tint: var(--open-tint); --b-ink: var(--open); }
+.b-overdue { --b-tint: var(--overdue-tint); --b-ink: var(--overdue); }
+.b-draft { --b-tint: var(--idle-tint); --b-ink: var(--idle); }
+.b-void { --b-tint: var(--idle-tint); --b-ink: var(--idle); text-decoration: line-through; }
+tr.is-void td:not(:last-child) { color: var(--muted); }
+
+.footnote { color: var(--muted); }
+.empty td { color: var(--muted); text-align: center; padding: 32px 12px; }
+
+/* ---- "Show type roles": every text element outlined in its role's colour */
+.audit { background: var(--surface); border: 1px solid var(--accent); border-radius: 12px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+.audit[hidden] { display: none; }
+.audit-roles { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.audit-roles li { display: inline-flex; align-items: center; gap: 8px; }
+.audit-roles .swatch { width: 14px; height: 14px; border-radius: 4px; border: 2px solid var(--role-ink); }
+.audit-roles strong { font-weight: var(--pulse-font-weight-subheading); }
+[data-type-role="caption"], [data-swatch="caption"] { --role-ink: #0e7490; }
+[data-type-role="body"], [data-swatch="body"] { --role-ink: #4d7c0f; }
+[data-type-role="subheading"], [data-swatch="subheading"] { --role-ink: #a16207; }
+[data-type-role="heading"], [data-swatch="heading"] { --role-ink: #c2410c; }
+[data-type-role="title"], [data-swatch="title"] { --role-ink: #be123c; }
+[data-type-role="headline"], [data-swatch="headline"] { --role-ink: #7e22ce; }
+[data-type-role="display"], [data-swatch="display"] { --role-ink: #1d4ed8; }
+[data-type-role="off-scale"] { --role-ink: #dc2626; }
+body.show-roles [data-type-role] { outline: 2px solid var(--role-ink); outline-offset: 1px; }
+body.show-roles [data-type-role="off-scale"] { outline-style: dashed; outline-width: 3px; }
+
+@media (max-width: 560px) {
+  .page { padding-top: 24px; gap: 16px; }
+}

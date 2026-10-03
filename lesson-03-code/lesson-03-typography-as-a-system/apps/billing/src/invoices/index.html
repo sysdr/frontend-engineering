@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoices · Pulse Billing</title>
+  <!-- Browsers do not resolve bare specifiers like "@pulse/contracts" the
+       way pnpm does, so this map points each one at the real source the
+       dev server mounts (see apps/control-tower/server/serve.mjs). -->
+  <script type="importmap">
+  {
+    "imports": {
+      "@pulse/config": "/pkg/config/index.js",
+      "@pulse/contracts": "/pkg/contracts/index.js",
+      "@pulse/design-system": "/pkg/design-system/index.js"
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="/pkg/design-system/tokens/typography.css">
+  <link rel="stylesheet" href="./invoices.css">
+</head>
+<body>
+  <header class="topbar">
+    <p class="brand pulse-text-body">Pulse Billing</p>
+    <p class="as-of pulse-text-caption" data-as-of></p>
+  </header>
+
+  <main class="page">
+    <div class="page-head">
+      <h1 class="pulse-text-headline">Invoices</h1>
+      <button type="button" class="audit-toggle pulse-text-body" data-audit-toggle aria-pressed="false">Show type roles</button>
+    </div>
+
+    <section class="figures" aria-label="Totals">
+      <div class="figure"><p class="pulse-text-caption">Outstanding</p><p class="amount pulse-text-title" data-figure="outstanding"></p></div>
+      <div class="figure overdue"><p class="pulse-text-caption" data-overdue-label>Overdue</p><p class="amount pulse-text-title" data-figure="overdue"></p></div>
+      <div class="figure"><p class="pulse-text-caption">Collected</p><p class="amount pulse-text-title" data-figure="paid"></p></div>
+    </section>
+
+    <aside class="audit" data-audit hidden aria-live="polite">
+      <h2 class="pulse-text-subheading">Type roles on this page</h2>
+      <p class="pulse-text-body" data-audit-sentence></p>
+      <ul class="audit-roles" data-audit-roles></ul>
+    </aside>
+
+    <section class="list" aria-labelledby="list-h">
+      <div class="list-head">
+        <h2 id="list-h" class="pulse-text-heading" data-list-title>All invoices</h2>
+        <div class="views" role="group" aria-label="Show invoices" data-views></div>
+      </div>
+      <div class="table-wrap">
+        <table class="invoices">
+          <thead>
+            <tr>
+              <th scope="col" class="pulse-text-caption" aria-sort="descending" data-sort-col="id"><button type="button" data-sort="id">Invoice</button></th>
+              <th scope="col" class="pulse-text-caption">Customer</th>
+              <th scope="col" class="pulse-text-caption">Issued</th>
+              <th scope="col" class="pulse-text-caption" data-sort-col="dueOn"><button type="button" data-sort="dueOn">Due</button></th>
+              <th scope="col" class="pulse-text-caption num" data-sort-col="amountCents"><button type="button" data-sort="amountCents">Amount</button></th>
+              <th scope="col" class="pulse-text-caption">Status</th>
+            </tr>
+          </thead>
+          <tbody data-rows></tbody>
+        </table>
+      </div>
+      <p class="footnote pulse-text-caption" data-footnote></p>
+    </section>
+  </main>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

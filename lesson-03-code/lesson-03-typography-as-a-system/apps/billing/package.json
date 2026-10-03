@@ -1,0 +1,15 @@
+{
+  "name": "@pulse/billing",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Pulse billing app — owned by @pulse/billing-team",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": { ".": "./dist/index.js" },
+  "scripts": {
+    "build": "node ../../scripts/build-package.mjs",
+    "lint": "eslint src",
+    "test": "node --test"
+  },
+  "dependencies": { "@pulse/contracts": "workspace:*", "@pulse/design-system": "workspace:*" }
+}

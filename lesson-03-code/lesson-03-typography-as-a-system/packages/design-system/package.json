@@ -1,0 +1,15 @@
+{
+  "name": "@pulse/design-system",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Shared UI tokens and formatters. Shared: every team approves changes.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": { ".": "./dist/index.js" },
+  "scripts": {
+    "build": "node ../../scripts/build-package.mjs",
+    "lint": "eslint src",
+    "test": "node --test"
+  },
+  "dependencies": { "@pulse/config": "workspace:*" }
+}

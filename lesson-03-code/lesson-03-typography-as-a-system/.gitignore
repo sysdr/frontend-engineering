@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.turbo/
+.remote-cache/
+test-results/
+playwright-report/
