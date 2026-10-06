@@ -1,0 +1,114 @@
+/* Control Tower layout, rebuilt in Lesson 5 on the 12-column grid.
+   Every margin, padding and gap here is a scale step or a layout role;
+   pulse/no-raw-spacing fails the build on anything else. */
+
+.topbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--pulse-space-3);
+  padding: var(--pulse-space-2) var(--pulse-layout-page-margin);
+  background: var(--pulse-color-surface-raised);
+  border-bottom: 1px solid var(--pulse-color-border);
+}
+.brand {
+  color: var(--pulse-color-text);
+  text-decoration: none;
+}
+.brand img { display: block; }
+
+/* The board: .pulse-grid gives 12 columns and the gutter; panels pick a span. */
+.board {
+  padding: var(--pulse-layout-page-margin);
+}
+
+.panel {
+  min-width: 0;
+  padding: var(--pulse-layout-panel-padding);
+  background: var(--pulse-color-surface-raised);
+  border: 1px solid var(--pulse-color-border);
+  border-radius: 12px;
+}
+.panel-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--pulse-space-2);
+}
+.table-wrap { overflow-x: auto; }
+code { color: var(--pulse-color-text); }
+
+/* Build status */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--pulse-space-2);
+}
+.card {
+  padding: var(--pulse-space-2);
+  background: var(--pulse-color-surface);
+  border: 1px solid var(--pulse-color-border);
+  border-radius: 8px;
+}
+.card-name { font-weight: 600; overflow-wrap: anywhere; }
+
+/* Ownership graph: SVG coordinates, not CSS spacing. */
+.graph-wrap { overflow-x: auto; }
+.graph { display: block; width: 100%; min-width: 400px; height: auto; }
+.graph .edge { stroke: var(--pulse-color-border-strong); stroke-width: 1.5; }
+.graph .node { cursor: pointer; outline: none; }
+.graph .node rect { fill: var(--pulse-color-surface-sunken); stroke: var(--pulse-color-border-strong); stroke-width: 1; }
+.graph .node-label { fill: var(--pulse-color-text); font-size: var(--pulse-font-size-caption); font-weight: 600; }
+.graph .node.is-team rect { fill: var(--pulse-color-accent); stroke: var(--pulse-color-accent); }
+.graph .node.is-team .node-label { fill: var(--pulse-color-on-accent); }
+.graph .node.is-selected rect { stroke: var(--pulse-color-text); stroke-width: 2; }
+.graph .node:focus-visible rect { stroke: var(--pulse-color-focus-ring); stroke-width: 3; }
+
+/* Contrast audit swatches */
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--pulse-space-6);
+  min-height: var(--pulse-space-4);
+  padding: 0 var(--pulse-space-1);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  font-weight: 600;
+}
+.swatch--ui { border: 3px solid var(--fg); }
+.contrast-table td,
+.contrast-table th { white-space: nowrap; }
+
+/* Type scale */
+.sample { white-space: nowrap; }
+
+/* Spacing panel (Lesson 5) */
+[data-spacing-scale] th,
+[data-spacing-scale] td { white-space: nowrap; }
+.space-bar {
+  display: block;
+  height: var(--pulse-space-2);
+  border-radius: 2px;
+  background-color: var(--pulse-color-accent);
+  /* A tick at every base unit, so space-3 visibly holds three 8px units. */
+  background-image: repeating-linear-gradient(90deg, transparent 0 calc(var(--pulse-space-unit) - 1px), var(--pulse-color-surface-raised) calc(var(--pulse-space-unit) - 1px) var(--pulse-space-unit));
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--pulse-space-2);
+}
+.fact {
+  padding: var(--pulse-space-2);
+  background: var(--pulse-color-surface-sunken);
+  border-radius: 8px;
+}
+.fact dd { font-variant-numeric: tabular-nums; }
+
+@media (max-width: 959.98px) {
+  /* Narrow: the top bar becomes a wrapping row, so nothing overlaps. */
+  .topbar { display: flex; flex-wrap: wrap; gap: var(--pulse-space-2); }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
