@@ -1,0 +1,12 @@
+{
+  "name": "@pulse/config",
+  "version": "0.6.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.js",
+  "dependencies": {},
+  "scripts": {
+    "build": "node ../../scripts/build-package.mjs",
+    "test": "node ../../scripts/smoke-package.mjs"
+  }
+}

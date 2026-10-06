@@ -1,0 +1,161 @@
+/* Lesson 6: interactive primitives and their five states.
+
+   Every state is written once, as a selector list: the pseudo-class a person
+   triggers (:hover, :focus-visible, :active) and the [data-state] the State
+   gallery uses to pin it in place. The gallery can't drift from the real
+   control, because it is drawn by the same rule. */
+
+.pulse-icon {
+  display: inline-block;
+  flex: none;
+  vertical-align: middle;
+}
+
+/* ---- Button ----------------------------------------------------------- */
+
+/* Each variant names its colour for each state. The state rules below only
+   choose which of those colours is live. */
+.pulse-button {
+  --c-bg: var(--c-bg-default);
+  --c-ink: var(--c-ink-default);
+  --c-border: var(--c-border-default);
+  --c-border-style: solid;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pulse-space-1);
+  margin: 0;
+  padding: var(--pulse-space-1) var(--pulse-space-2);
+  border: 1px var(--c-border-style) var(--c-border);
+  border-radius: 8px;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: inherit;
+  font-size: var(--pulse-font-size-caption);
+  line-height: var(--pulse-line-height-caption);
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.pulse-button[data-variant="secondary"] {
+  --c-bg-default: var(--pulse-color-surface-raised);
+  --c-bg-hover: var(--pulse-color-surface-sunken);
+  --c-bg-active: var(--pulse-color-surface-pressed);
+  --c-ink-default: var(--pulse-color-text);
+  --c-border-default: var(--pulse-color-border-strong);
+  --c-border-hover: var(--pulse-color-text);
+  --c-border-active: var(--pulse-color-text);
+}
+/* A pressed toggle (aria-pressed="true") takes the primary colours. */
+.pulse-button[data-variant="primary"],
+.pulse-button[aria-pressed="true"] {
+  --c-bg-default: var(--pulse-color-accent);
+  --c-bg-hover: var(--pulse-color-accent-strong);
+  --c-bg-active: var(--pulse-color-accent-pressed);
+  --c-ink-default: var(--pulse-color-on-accent);
+  --c-border-default: var(--pulse-color-accent);
+  --c-border-hover: var(--pulse-color-accent-strong);
+  --c-border-active: var(--pulse-color-accent-pressed);
+}
+
+/* Hover: one step deeper. */
+.pulse-button:hover:not(:disabled),
+.pulse-button[data-state="hover"] {
+  --c-bg: var(--c-bg-hover);
+  --c-border: var(--c-border-hover);
+}
+/* Focus: the ring, and nothing else, so it reads the same on every control. */
+.pulse-button:focus-visible,
+.pulse-button[data-state="focus"] {
+  outline: 3px solid var(--pulse-color-focus-ring);
+  outline-offset: 2px;
+}
+/* Active: two steps deeper, and the button sinks by one pixel. */
+.pulse-button:active:not(:disabled),
+.pulse-button[data-state="active"] {
+  --c-bg: var(--c-bg-active);
+  --c-border: var(--c-border-active);
+  transform: translateY(1px);
+}
+
+/* ---- FormField -------------------------------------------------------- */
+
+.pulse-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pulse-space-1);
+  min-width: 0;
+}
+.pulse-field__label {
+  font-size: var(--pulse-font-size-caption);
+  line-height: var(--pulse-line-height-caption);
+  font-weight: 600;
+}
+.pulse-field__input {
+  --c-bg: var(--pulse-color-surface-raised);
+  --c-ink: var(--pulse-color-text);
+  --c-border: var(--pulse-color-border-strong);
+  --c-border-style: solid;
+  width: 100%;
+  margin: 0;
+  padding: var(--pulse-space-1) var(--pulse-space-2);
+  border: 1px var(--c-border-style) var(--c-border);
+  border-radius: 8px;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: inherit;
+  font-size: var(--pulse-font-size-body);
+  line-height: var(--pulse-line-height-body);
+}
+.pulse-field__input::placeholder { color: var(--pulse-color-text-muted); }
+.pulse-field[data-invalid] .pulse-field__input { --c-border: var(--pulse-color-danger-text); }
+.pulse-field__hint {
+  color: var(--pulse-color-text-muted);
+  font-size: var(--pulse-font-size-caption);
+  line-height: var(--pulse-line-height-caption);
+}
+.pulse-field__error {
+  display: flex;
+  align-items: center;
+  gap: var(--pulse-space-1);
+  color: var(--pulse-color-danger-text);
+  font-size: var(--pulse-font-size-caption);
+  line-height: var(--pulse-line-height-caption);
+  font-weight: 600;
+}
+
+/* Hover: the edge darkens and the field lifts off the panel. */
+.pulse-field__input:hover:not(:disabled),
+.pulse-field__input[data-state="hover"] {
+  --c-border: var(--pulse-color-text);
+  --c-bg: var(--pulse-color-surface);
+}
+/* Focus: the same ring as Button, plus an accent edge. */
+.pulse-field__input:focus-visible,
+.pulse-field__input[data-state="focus"] {
+  --c-border: var(--pulse-color-accent);
+  outline: 3px solid var(--pulse-color-focus-ring);
+  outline-offset: 2px;
+}
+/* Active: the pointer is held down. A text field takes focus on press, so the
+   ring is part of this state too; the field sinks to the pressed surface. */
+.pulse-field__input:active:not(:disabled),
+.pulse-field__input[data-state="active"] {
+  --c-border: var(--pulse-color-accent-pressed);
+  --c-bg: var(--pulse-color-surface-pressed);
+  outline: 3px solid var(--pulse-color-focus-ring);
+  outline-offset: 2px;
+}
+.pulse-field:has(.pulse-field__input:disabled) .pulse-field__label { color: var(--pulse-color-text-muted); }
+
+/* ---- Disabled, for both ----------------------------------------------- */
+
+/* Three cues at once: a flat grey fill, muted ink, and a dashed edge. The
+   dashed edge is the one that survives greyscale and colour blindness. */
+.pulse-button:disabled,
+.pulse-field__input:disabled {
+  --c-bg: var(--pulse-color-surface-sunken);
+  --c-ink: var(--pulse-color-text-muted);
+  --c-border: var(--pulse-color-border-strong);
+  --c-border-style: dashed;
+  cursor: not-allowed;
+}

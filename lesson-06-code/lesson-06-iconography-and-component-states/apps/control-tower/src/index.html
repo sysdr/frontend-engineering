@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pulse Control Tower</title>
+    <!-- Set the theme before first paint, so a dark-mode user never sees a white flash. -->
+    <script>
+      try {
+        const c = localStorage.getItem("pulse:theme");
+        const dark = c === "dark" || ((c === null || c === "system") && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+      } catch {}
+    </script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@pulse/design-system": "/packages/design-system/src/index.js",
+          "@pulse/design-system/": "/packages/design-system/src/"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="/packages/design-system/src/base.css" />
+    <link rel="stylesheet" href="/packages/design-system/src/tokens/colors.css" data-token-sheet />
+    <link rel="stylesheet" href="/packages/design-system/src/tokens/spacing.css" data-token-sheet />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand pulse-cluster-1" href="/">
+        <img src="./brand/pulse-mark.svg" width="32" height="32" alt="" />
+        <span class="pulse-text-subheading">Pulse Control Tower</span>
+      </a>
+      <nav class="pulse-cluster-2 pulse-text-caption" aria-label="Apps"><a href="/billing/invoices/">Invoice list</a></nav>
+      <div data-overlay-slot></div>
+      <div data-theme-slot></div>
+    </header>
+    <main class="board pulse-grid">
+      <section class="panel pulse-span-12 pulse-stack-2" data-panel="states" aria-labelledby="states-title"></section>
+      <section class="panel pulse-span-12 pulse-stack-2" data-panel="icons" aria-labelledby="icons-title"></section>
+      <section class="panel pulse-span-5 pulse-stack-2" data-panel="spacing" aria-labelledby="spacing-title"></section>
+      <section class="panel pulse-span-7 pulse-stack-2" data-panel="build" aria-labelledby="build-title"></section>
+      <section class="panel pulse-span-5 pulse-stack-2" data-panel="owners" aria-labelledby="owners-title"></section>
+      <section class="panel pulse-span-7 pulse-stack-2" data-panel="type-scale" aria-labelledby="type-title"></section>
+      <section class="panel pulse-span-12 pulse-stack-2" data-panel="contrast" aria-labelledby="contrast-title"></section>
+    </main>
+  </body>
+</html>
