@@ -1,9 +1,0 @@
-# Carried forward from Lesson 2. Every workspace package has exactly one owning team.
-/apps/control-tower/     @pulse/platform-dx
-/apps/billing/           @pulse/billing
-/apps/analytics/         @pulse/analytics
-/apps/shell/             @pulse/platform-shell
-/packages/design-system/ @pulse/design-systems
-/packages/config/        @pulse/platform-dx
-/packages/api-client/    @pulse/platform-api
-/packages/utils/         @pulse/platform-dx
